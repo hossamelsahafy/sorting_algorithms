@@ -1,23 +1,32 @@
 #include "sort.h"
 /**
- * swap - simple function to swap two values
- * @a: First element
- * @b: Second element
- * Return: Nothing
+ * swap - function to swap two integers
+ *
+ * @x: parameter to define int
+ *
+ * @y: parameter to define int
  */
-void swap(int *a, int *b)
+void swap(int *x, int *y)
 {
-	int temp = *a;
-	*a = *b;
-	*b = temp;
+	int tmp;
+
+	tmp = *x;
+	*x = *y;
+	*y = tmp;
 }
 /**
- * partition - function to correct position of the pivot
- * @array: pointer to array
- * @low: index of the start
- * @high: index of the end
- * @size: array size
- * Return: Nothing
+ * partition - function Function that partitions an array and places
+ * the pivot element in its sorted position
+ *
+ * @array: parameter to define int
+ *
+ * @low: parameter to define int
+ *
+ * @high: parameter to define int
+ *
+ * @size: parameter to define size_t
+ *
+ * Return: will be i + 1
  */
 size_t partition(int *array, size_t low, size_t high, size_t size)
 {
@@ -43,12 +52,15 @@ size_t partition(int *array, size_t low, size_t high, size_t size)
 	return (i + 1);
 }
 /**
- * quick_sort_recursion - function helper to do sort subarrays
- * @array: array of integers
- * @low: index of the start
- * @high: index of the end
- * @size: array size
- * Return: Nothing
+ * quick_sort_helper - function to help in quick sort method
+ *
+ * @array: parameter that point to int
+ *
+ * @low: parameter to define size_t
+ *
+ * @high: parameter to define size_t
+ *
+ * @size: parameter to define size_t
  */
 void quick_sort_helper(int *array, size_t low, size_t high, size_t size)
 {
@@ -64,10 +76,12 @@ void quick_sort_helper(int *array, size_t low, size_t high, size_t size)
 	}
 }
 /**
- * quick_sort - function to perform quick sort algorithm
- * @array: pointer to array of integers
- * @size: number of element in the array
- * Return: Nothing
+ * quick_sort - function that sorts an array of integers in
+ * ascending order using the Quick sort algorithm
+ *
+ * @array: parameter that point to int
+ *
+ * @size: parameter to define size_t
  */
 void quick_sort(int *array, size_t size)
 {
