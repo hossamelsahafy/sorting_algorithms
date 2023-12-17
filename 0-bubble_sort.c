@@ -28,6 +28,7 @@ void swap(int *x, int *y)
  *
  * @size: parameter to define size_t
  *
+ * Return: return if array == NULL
  */
 void bubble_sort(int *array, size_t size)
 {
