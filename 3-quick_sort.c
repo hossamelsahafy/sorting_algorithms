@@ -1,86 +1,77 @@
 #include "sort.h"
 /**
- * swap - function to swap two integers
- *
- * @x: parameter point to int
- *
- * @y: parameter point to int
+ * swap - simple function to swap two values
+ * @a: First element
+ * @b: Second element
+ * Return: Nothing
  */
-void swap(int *x, int *y)
+void swap(int *a, int *b)
 {
-	int tmp;
-
-	tmp = *x;
-	*x = *y;
-	*y = tmp;
+	int temp = *a;
+	*a = *b;
+	*b = temp;
 }
 /**
- * partition - function Function that partitions an array and places
- * the pivot element in its sorted position
- *
- * @arr: parameter to define int
- *
- * @low: parameter to define int
- *
- * @high: parameter to define int
- *
- * @size: parameter to define size_t
- *
- * Return: will be i + 1
+ * partition - function to correct position of the pivot
+ * @array: pointer to array
+ * @low: index of the start
+ * @high: index of the end
+ * @size: array size
+ * Return: Nothing
  */
-int partition(int arr[], int low, int high, size_t size)
+size_t partition(int *array, size_t low, size_t high, size_t size)
 {
-	int j;
-	int pivot = arr[high];
-	int i = low - 1;
+	int pivot = array[high];
+	size_t i = low - 1;
+	size_t j;
 
-	for (j = low; j <= high - 1; j++)
+	for (j = low; j < high; j++)
 	{
-		if (arr[j] < pivot)
+		if (array[j] <= pivot)
 		{
 			i++;
-			swap(&arr[i], &arr[j]);
-			print_array(arr, size);
+			if (i != j)
+			{
+				swap(&array[i], &array[j]);
+				print_array(array, size);
+			}
 		}
 	}
-	swap(&arr[i + 1], &arr[high]);
-	print_array(arr, size);
+	swap(&array[i + 1], &array[high]);
+	if (array[i + 1] != array[high])
+		print_array(array, size);
 	return (i + 1);
 }
 /**
- * quick_sort_helper - function to help
- *
- * @array: parameter that point to int
- *
- * @low: parameter to identify int
- *
- * @high: parameter to identify int
- *
- * @size: parameter to identify size_t
+ * quick_sort_recursion - function helper to do sort subarrays
+ * @array: array of integers
+ * @low: index of the start
+ * @high: index of the end
+ * @size: array size
+ * Return: Nothing
  */
-void quick_sort_helper(int *array, int low, int high, size_t size)
+void quick_sort_recursion(int *array, size_t low, size_t high, size_t size)
 {
+	size_t pivot_index;
+
 	if (low < high)
 	{
-		int pi = partition(array, low, high, size);
-
-		if (pi > 1)
-			quick_sort_helper(array, low, pi - 1, size);
+		pivot_index = partition(array, low, high, size);
+		if (pivot_index > 1)
+			quick_sort_recursion(array, low, pivot_index - 1, size);
 		if (high > 1)
-			quick_sort_helper(array, pi + 1, high, size);
+			quick_sort_recursion(array, pivot_index + 1, high, size);
 	}
 }
 /**
- * quick_sort - function that sorts an array of integers in
- * ascending order using the Quick sort algorithm
- *
- * @array: parameter that point to int
- *
- * @size: parameter to define size_t
+ * quick_sort - function to perform quick sort algorithm
+ * @array: pointer to array of integers
+ * @size: number of element in the array
+ * Return: Nothing
  */
 void quick_sort(int *array, size_t size)
 {
 	if (!array || size < 2)
 		return;
-	quick_sort_helper(array, 0, size - 1, size);
+	quick_sort_recursion(array, 0, size - 1, size);
 }
