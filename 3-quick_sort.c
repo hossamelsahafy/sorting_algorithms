@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include "sort.h"
-
 /**
  * swap - function to swap two integers
  *
@@ -27,6 +25,7 @@ void swap(int *x, int *y)
  * @high: parameter to define int
  *
  * @size: parameter to define size_t
+ *
  * Return: will be i + 1
  */
 int partition(int arr[], int low, int high, size_t size)
@@ -65,8 +64,10 @@ void quick_sort_helper(int *array, int low, int high, size_t size)
 	{
 		int pi = partition(array, low, high, size);
 
-		quick_sort_helper(array, low, pi - 1, size);
-		quick_sort_helper(array, pi + 1, high, size);
+		if (pi > 1)
+			quick_sort_helper(array, low, pi - 1, size);
+		if (high > 1)
+			quick_sort_helper(array, pi + 1, high, size);
 	}
 }
 /**
@@ -79,5 +80,7 @@ void quick_sort_helper(int *array, int low, int high, size_t size)
  */
 void quick_sort(int *array, size_t size)
 {
+	if (!array || size < 2)
+		return;
 	quick_sort_helper(array, 0, size - 1, size);
 }
